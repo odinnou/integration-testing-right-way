@@ -19,6 +19,7 @@ builder.Services.AddControllers(options =>
     options.Filters.Add(typeof(HttpGlobalExceptionFilter));
 });
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
+builder.Services.AddHealthChecks();
 builder.Services.AddUseCases();
 builder.Services.AddThirdParties(appSettings);
 builder.Services.AddAutoMapper(Assembly.Load(typeof(Program).Assembly.GetName().Name!));
@@ -32,9 +33,15 @@ app.UseDeveloperExceptionPage();
 app.UseRouting();
 app.UseEndpoints(endpoints =>
 {
+    endpoints.MapHealthChecks("/hc");
     endpoints.MapControllers();
 });
 
 // 4. Application startup step
 
 app.Run();
+
+//  Make the implicit Program class public so test projects can access it
+#pragma warning disable S1118 // Utility classes should not have public constructors
+public partial class Program { }
+#pragma warning restore S1118 // Utility classes should not have public constructors
