@@ -22,6 +22,7 @@ public static class HostConfiguration
             })
             .ConfigureTestServices(s =>
             {
+                // Allow to overwrite en existing services by a mock.
             });
         });
     }
