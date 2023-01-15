@@ -7,7 +7,7 @@ namespace Tests.Fixtures;
 
 public static class RoutesExpectation
 {
-    public static async Task SetExpectationsForEnrichData(MockServerClient mockServerClient)
+    public static async Task SetExpectationsForGeocoding(MockServerClient mockServerClient)
     {
         await mockServerClient.When(Request()
                 .WithMethod(HttpMethod.Get)

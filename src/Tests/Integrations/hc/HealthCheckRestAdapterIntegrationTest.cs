@@ -18,7 +18,7 @@ public class HealthCheckRestAdapterIntegrationTest : BaseIntegrationTest
         // arrange
         using (TestServer = HostConfiguration.Factory().Server)
         {
-            await ResetDatabase(Dataset.Empty);
+            await ResetAndInitDatabase(Dataset.Empty);
             HttpClient httpClient = TestServer.CreateClient();
             string route = "/hc";
 

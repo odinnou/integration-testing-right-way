@@ -26,7 +26,7 @@ public abstract class BaseIntegrationTest
         FixtureInstance = new Fixture();
     }
 
-    protected static async Task ResetExpectation()
+    protected static async Task ResetAndInitExpectations()
     {
         MockServerClient mockServerClient = new("localhost", 1090);
 
@@ -34,10 +34,10 @@ public abstract class BaseIntegrationTest
         await mockServerClient.ResetAsync();
 
         // init expectations
-        await RoutesExpectation.SetExpectationsForEnrichData(mockServerClient);
+        await RoutesExpectation.SetExpectationsForGeocoding(mockServerClient);
     }
 
-    protected async Task ResetDatabase(Dataset dataset = Dataset.Empty)
+    protected async Task ResetAndInitDatabase(Dataset dataset = Dataset.Empty)
     {
         IServiceProvider iServiceProvider = TestServer.Services;
 
@@ -50,10 +50,6 @@ public abstract class BaseIntegrationTest
         // init datas
         switch (dataset)
         {
-            case Dataset.Empty:
-                {
-                    break;
-                }
             case Dataset.FetchPanda:
                 {
                     await PandaData.PopulateDataTestForFetching(dbContext, FixtureInstance);

@@ -24,8 +24,8 @@ public class PandasRestAdapterIntegrationTest : BaseIntegrationTest
         // arrange
         using (TestServer = HostConfiguration.Factory().Server)
         {
-            await ResetExpectation();
-            await ResetDatabase(Dataset.FetchPanda);
+            await ResetAndInitExpectations();
+            await ResetAndInitDatabase(Dataset.FetchPanda);
 
             HttpClient httpClient = TestServer.CreateClient();
             string route = $"/api/pandas/{PandaData.Constants.PandaId}";
@@ -48,8 +48,8 @@ public class PandasRestAdapterIntegrationTest : BaseIntegrationTest
         // arrange
         using (TestServer = HostConfiguration.Factory().Server)
         {
-            await ResetExpectation();
-            await ResetDatabase(Dataset.FetchPanda);
+            await ResetAndInitExpectations();
+            await ResetAndInitDatabase(Dataset.FetchPanda);
 
             HttpClient httpClient = TestServer.CreateClient();
             string route = $"/api/pandas/{PandaData.Constants.PandaId2}";
@@ -73,8 +73,8 @@ public class PandasRestAdapterIntegrationTest : BaseIntegrationTest
         Guid pandaId = Guid.NewGuid();
         using (TestServer = HostConfiguration.Factory().Server)
         {
-            await ResetExpectation();
-            await ResetDatabase(Dataset.FetchPanda);
+            await ResetAndInitExpectations();
+            await ResetAndInitDatabase(Dataset.FetchPanda);
 
             HttpClient httpClient = TestServer.CreateClient();
             string route = $"/api/pandas/{pandaId}";
