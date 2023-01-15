@@ -13,12 +13,10 @@ public class HealthCheckRestAdapterIntegrationTest : BaseIntegrationTest
         // arrange
         using (TestServer = HostConfiguration.Factory().Server)
         {
-            await ResetAndInitDatabase(Dataset.Empty);
             HttpClient httpClient = TestServer.CreateClient();
-            string route = "/hc";
 
             // act
-            HttpResponseMessage httpResponse = await httpClient.GetAsync(route);
+            HttpResponseMessage httpResponse = await httpClient.GetAsync("/hc");
 
             // assert
             httpResponse.StatusCode.Should().Be(HttpStatusCode.OK);
