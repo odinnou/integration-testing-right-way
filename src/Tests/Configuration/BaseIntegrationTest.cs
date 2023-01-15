@@ -17,7 +17,6 @@ namespace Tests.Configuration;
 public abstract class BaseIntegrationTest
 {
     protected TestServer TestServer { get; set; }
-    protected Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactory<Program> Factory { get; set; }
     protected IFixture FixtureInstance { get; private set; }
     protected TestContainerConfiguration TestContainers { get; private set; }
 
