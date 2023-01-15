@@ -11,7 +11,7 @@ using Xunit;
 namespace Tests.Configuration;
 
 /// <summary>
-/// Tous les intégrations tests seront joué en séquentiel (non parallélisé) grâce à cette collection : évite des problèmes de contraintes unique
+/// All integration tests will be played sequentially (not parallelized) thanks to this collection name: avoiding unique constraint issues.
 /// </summary>
 [Collection("INTEGRATION_TEST_COLLECTION")]
 public abstract class BaseIntegrationTest

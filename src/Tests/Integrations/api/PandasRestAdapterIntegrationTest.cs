@@ -33,7 +33,7 @@ public class PandasRestAdapterIntegrationTest : BaseIntegrationTest
             // act
             HttpResponseMessage httpResponse = await httpClient.GetAsync(route);
 
-            //assert
+            // assert
             httpResponse.StatusCode.Should().Be(HttpStatusCode.OK);
 
             PandaDto result = JsonConvert.DeserializeObject<PandaDto>(httpResponse.Content.ReadAsStringAsync().Result)!;
@@ -57,7 +57,7 @@ public class PandasRestAdapterIntegrationTest : BaseIntegrationTest
             // act
             HttpResponseMessage httpResponse = await httpClient.GetAsync(route);
 
-            //assert
+            // assert
             httpResponse.StatusCode.Should().Be(HttpStatusCode.OK);
 
             PandaDto result = JsonConvert.DeserializeObject<PandaDto>(httpResponse.Content.ReadAsStringAsync().Result)!;
@@ -82,7 +82,7 @@ public class PandasRestAdapterIntegrationTest : BaseIntegrationTest
             // act
             HttpResponseMessage httpResponse = await httpClient.GetAsync(route);
 
-            //assert
+            // assert
             httpResponse.StatusCode.Should().Be(HttpStatusCode.NotFound);
             string result = httpResponse.Content.ReadAsStringAsync().Result;
             result.Should().Contain($"no panda found for id: {pandaId}");
