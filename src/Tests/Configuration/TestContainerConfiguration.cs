@@ -3,12 +3,12 @@ using TestEnvironment.Docker.Containers.Postgres;
 
 namespace Tests.Configuration;
 
-public class DatabaseFixture : IDisposable
+public class TestContainerConfiguration : IDisposable
 {
     public IDockerEnvironment PostgresDatabase { get; private set; }
     public IDockerEnvironment MockServer { get; private set; }
 
-    public DatabaseFixture()
+    public TestContainerConfiguration()
     {
         PostgresDatabase = new DockerEnvironmentBuilder().SetName("panda-service-test")
                .AddPostgresContainer(container => container with

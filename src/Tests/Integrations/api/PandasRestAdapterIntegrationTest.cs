@@ -11,7 +11,7 @@ namespace Tests.Integrations.RestAdapters.v1;
 
 public class PandasRestAdapterIntegrationTest : BaseIntegrationTest
 {
-    public PandasRestAdapterIntegrationTest(DatabaseFixture databaseFixture)
+    public PandasRestAdapterIntegrationTest(TestContainerConfiguration databaseFixture)
     {
         Init(databaseFixture);
     }

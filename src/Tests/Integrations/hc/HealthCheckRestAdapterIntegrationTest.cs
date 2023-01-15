@@ -7,7 +7,7 @@ namespace Tests.Integrations.RestAdapters.hc;
 
 public class HealthCheckRestAdapterIntegrationTest : BaseIntegrationTest
 {
-    public HealthCheckRestAdapterIntegrationTest(DatabaseFixture databaseFixture)
+    public HealthCheckRestAdapterIntegrationTest(TestContainerConfiguration databaseFixture)
     {
         Init(databaseFixture);
     }

@@ -19,11 +19,11 @@ public abstract class BaseIntegrationTest
     protected TestServer TestServer { get; set; }
     protected Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactory<Program> Factory { get; set; }
     protected IFixture FixtureInstance { get; private set; }
-    protected DatabaseFixture DatabaseFixture { get; private set; }
+    protected TestContainerConfiguration TestContainers { get; private set; }
 
-    protected void Init(DatabaseFixture databaseFixture)
+    protected void Init(TestContainerConfiguration testContainers)
     {
-        DatabaseFixture = databaseFixture;
+        TestContainers = testContainers;
         FixtureInstance = new Fixture();
     }
 
