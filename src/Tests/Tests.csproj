@@ -15,9 +15,12 @@
     </ItemGroup>
 
     <ItemGroup>
+        <!--Allow to setup an ASP.NET TestServer-->
         <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="7.0.1" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.1" />
+        <!--Speed up integration of MockServer-->
         <PackageReference Include="MockServerClientNet" Version="1.2.0" />
+        <!--Test environment powered by Docker, Testcontainers is also a good alternative-->
         <PackageReference Include="TestEnvironment.Docker.Containers.Postgres" Version="2.1.5" />
         <PackageReference Include="xunit" Version="2.4.2" />
         <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">

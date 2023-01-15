@@ -14,25 +14,15 @@ public class DatabaseFixture : IDisposable
 
     public DatabaseFixture()
     {
-        //POSTGRES_DB environment variable create database as a copy of database with same name as user name, here it's postgres
-        //postgres is default database of the postgis image, and it's correctly setup for gis types
         PostgresDatabase = new DockerEnvironmentBuilder()
                .SetName(PostgresDatabaseName)
                .AddPostgresContainer(p => p with
                {
                    Name = DbImageName,
-                   Ports = new Dictionary<ushort, ushort> { { 5432, 35432 } },
-                   ImageName = "postgis/postgis",
-                   UserName = "postgres",
-                   Password = "docker",
-                   EnvironmentVariables = new Dictionary<string, string>
-                   {
-                        {
-                            "POSTGRES_DB","panda-test"
-                        }
-                   }
+                   Ports = new Dictionary<ushort, ushort> { { 5432, 35432 } }
                })
                .Build();
+
         MockServer = new DockerEnvironmentBuilder()
               .SetName(MockServerName)
               .AddContainer(p => p with
