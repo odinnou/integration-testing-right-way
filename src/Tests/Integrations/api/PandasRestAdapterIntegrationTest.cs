@@ -11,11 +11,6 @@ namespace Tests.Integrations.RestAdapters.v1;
 
 public class PandasRestAdapterIntegrationTest : BaseIntegrationTest
 {
-    public PandasRestAdapterIntegrationTest(TestContainerConfiguration databaseFixture)
-    {
-        Init(databaseFixture);
-    }
-
     #region Get
 
     [Fact]

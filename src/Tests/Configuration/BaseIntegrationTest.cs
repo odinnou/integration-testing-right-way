@@ -18,11 +18,9 @@ public abstract class BaseIntegrationTest
 {
     protected TestServer TestServer { get; set; }
     protected IFixture FixtureInstance { get; private set; }
-    protected TestContainerConfiguration TestContainers { get; private set; }
 
-    protected void Init(TestContainerConfiguration testContainers)
+    protected BaseIntegrationTest()
     {
-        TestContainers = testContainers;
         FixtureInstance = new Fixture();
     }
 

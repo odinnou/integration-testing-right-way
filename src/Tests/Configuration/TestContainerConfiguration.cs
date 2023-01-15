@@ -10,17 +10,17 @@ public class TestContainerConfiguration : IDisposable
 
     public TestContainerConfiguration()
     {
-        PostgresDatabase = new DockerEnvironmentBuilder().SetName("panda-service-test")
+        PostgresDatabase = new DockerEnvironmentBuilder().SetName("panda-database-test")
                .AddPostgresContainer(container => container with
                {
                    Name = "db",
                    Ports = new Dictionary<ushort, ushort> { { 5432, 35432 } }
                }).Build();
 
-        MockServer = new DockerEnvironmentBuilder().SetName("mock-server-test")
+        MockServer = new DockerEnvironmentBuilder().SetName("panda-mockserver-test")
               .AddContainer(container => container with
               {
-                  Name = "thirdparties",
+                  Name = "mockserver",
                   ImageName = "mockserver/mockserver",
                   Ports = new Dictionary<ushort, ushort> { { 1080, 1090 } }
               }).Build();

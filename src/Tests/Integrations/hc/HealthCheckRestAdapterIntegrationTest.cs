@@ -7,11 +7,6 @@ namespace Tests.Integrations.RestAdapters.hc;
 
 public class HealthCheckRestAdapterIntegrationTest : BaseIntegrationTest
 {
-    public HealthCheckRestAdapterIntegrationTest(TestContainerConfiguration databaseFixture)
-    {
-        Init(databaseFixture);
-    }
-
     [Fact]
     public async Task HealthCheck_route_should_returns_OK_and_Healthy_word()
     {
