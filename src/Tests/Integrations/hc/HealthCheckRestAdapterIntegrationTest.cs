@@ -10,15 +10,15 @@ public class HealthCheckRestAdapterIntegrationTest : BaseIntegrationTest
     [Fact]
     public async Task HealthCheck_route_should_returns_OK_and_Healthy_word()
     {
-        // arrange
+        // arrange: setup a new TestServer
         using (TestServer = HostConfiguration.Factory().Server)
         {
-            HttpClient httpClient = TestServer.CreateClient();
+            using HttpClient httpClient = TestServer.CreateClient();
 
-            // act
+            // act: make an http call to the GET /hc endpoint
             HttpResponseMessage httpResponse = await httpClient.GetAsync("/hc");
 
-            // assert
+            // assert: verify HTTP status code and content as plain text
             httpResponse.StatusCode.Should().Be(HttpStatusCode.OK);
             string result = await httpResponse.Content.ReadAsStringAsync()!;
             result.Should().Be("Healthy");

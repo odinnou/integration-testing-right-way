@@ -22,11 +22,10 @@ public class PandasRestAdapterIntegrationTest : BaseIntegrationTest
             await ResetAndInitExpectations();
             await ResetAndInitDatabase(Dataset.FetchPanda);
 
-            HttpClient httpClient = TestServer.CreateClient();
-            string route = $"/api/pandas/{PandaData.Constants.PandaId}";
+            using HttpClient httpClient = TestServer.CreateClient();
 
             // act
-            HttpResponseMessage httpResponse = await httpClient.GetAsync(route);
+            HttpResponseMessage httpResponse = await httpClient.GetAsync($"/api/pandas/{PandaData.Constants.PandaId}");
 
             // assert
             httpResponse.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -46,11 +45,10 @@ public class PandasRestAdapterIntegrationTest : BaseIntegrationTest
             await ResetAndInitExpectations();
             await ResetAndInitDatabase(Dataset.FetchPanda);
 
-            HttpClient httpClient = TestServer.CreateClient();
-            string route = $"/api/pandas/{PandaData.Constants.PandaId2}";
+            using HttpClient httpClient = TestServer.CreateClient();
 
             // act
-            HttpResponseMessage httpResponse = await httpClient.GetAsync(route);
+            HttpResponseMessage httpResponse = await httpClient.GetAsync($"/api/pandas/{PandaData.Constants.PandaId2}");
 
             // assert
             httpResponse.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -71,11 +69,10 @@ public class PandasRestAdapterIntegrationTest : BaseIntegrationTest
             await ResetAndInitExpectations();
             await ResetAndInitDatabase(Dataset.FetchPanda);
 
-            HttpClient httpClient = TestServer.CreateClient();
-            string route = $"/api/pandas/{pandaId}";
+            using HttpClient httpClient = TestServer.CreateClient();
 
             // act
-            HttpResponseMessage httpResponse = await httpClient.GetAsync(route);
+            HttpResponseMessage httpResponse = await httpClient.GetAsync($"/api/pandas/{pandaId}");
 
             // assert
             httpResponse.StatusCode.Should().Be(HttpStatusCode.NotFound);
