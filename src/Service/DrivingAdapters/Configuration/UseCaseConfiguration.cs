@@ -8,6 +8,7 @@ public static class UseCaseConfiguration
     public static IServiceCollection AddUseCases(this IServiceCollection services)
     {
         services.AddTransient<IPandaFetcher, PandaFetcher>();
+        services.AddTransient<IPandaAppender, PandaAppender>();
 
         return services;
     }

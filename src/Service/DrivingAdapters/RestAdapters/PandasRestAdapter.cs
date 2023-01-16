@@ -14,12 +14,10 @@ namespace Service.DrivingAdapters.RestAdapters;
 public class PandasRestAdapter : ControllerBase
 {
     private readonly IMapper _mapper;
-    private readonly IPandaFetcher _pandaFetcher;
 
-    public PandasRestAdapter(IMapper mapper, IPandaFetcher pandaFetcher)
+    public PandasRestAdapter(IMapper mapper)
     {
         _mapper = mapper;
-        _pandaFetcher = pandaFetcher;
     }
 
     /// <summary>
@@ -31,10 +29,27 @@ public class PandasRestAdapter : ControllerBase
     [HttpGet("{pandaId:guid:required}")]
     [ProducesResponseType(typeof(PandaDto), Status200OK)]
     [ProducesResponseType(typeof(void), Status404NotFound)]
-    public async Task<PandaDto> Get(Guid pandaId)
+    public async Task<PandaDto> Get([FromServices] IPandaFetcher pandaFetcher, Guid pandaId)
     {
-        Panda panda = await _pandaFetcher.Execute(pandaId);
+        Panda panda = await pandaFetcher.Execute(pandaId);
 
         return _mapper.Map<PandaDto>(panda);
+    }
+
+    /// <summary>
+    /// Add a new panda to the datastore
+    /// </summary>
+    /// <param name="panda">Panda model to apply</param>
+    /// <response code="200">Ok, correctly added panda</response>
+    /// <response code="400">BadRequest, model is invalid</response>
+    [HttpPost]
+    [ProducesResponseType(typeof(PandaDto), Status200OK)]
+    [ProducesResponseType(typeof(void), Status400BadRequest)]
+    public async Task<PandaDto> Add([FromServices] IPandaAppender pandaAppender, InsertPandaDto panda)
+    {
+        Panda pandaToAdd = _mapper.Map<Panda>(panda);
+        Panda addedPanda = await pandaAppender.Execute(pandaToAdd);
+
+        return _mapper.Map<PandaDto>(addedPanda);
     }
 }

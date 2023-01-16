@@ -8,6 +8,7 @@ public class PandaMappingProfile : Profile
     public PandaMappingProfile()
     {
         CreateMap<PandaEntity, Panda>()
-            .ForMember(dest => dest.LastKnownAddress, opt => opt.Ignore());
+            .ForMember(dest => dest.LastKnownAddress, opt => opt.Ignore())
+            .ReverseMap();
     }
 }
