@@ -1,4 +1,5 @@
 using AutoFixture;
+using AutoFixture.Xunit2;
 using FluentAssertions;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,7 +32,7 @@ public class PandasRestAdapterIntegrationTest : BaseIntegrationTest
 
             using HttpClient httpClient = TestServer.CreateClient();
 
-            // act
+            // act: serialize DTO as JSON
             HttpResponseMessage httpResponse = await httpClient.PostAsync($"/api/pandas", new StringContent(JsonConvert.SerializeObject(dto, new Newtonsoft.Json.Converters.StringEnumConverter()), Encoding.UTF8, MediaTypeNames.Application.Json));
 
             // assert: verify status code and check content as plain text
@@ -117,11 +118,10 @@ public class PandasRestAdapterIntegrationTest : BaseIntegrationTest
         }
     }
 
-    [Fact]
-    public async Task Get_should_returns_NotFound_status_code_when_unknow_id()
+    [Theory, AutoData]
+    public async Task Get_should_returns_NotFound_status_code_when_unknow_id(Guid pandaId)
     {
-        // arrange: use a random uuid (not existing in the database)
-        Guid pandaId = Guid.NewGuid();
+        // arrange: using a random uuid (not existing in the database)
         using (TestServer = HostConfiguration.Factory().Server)
         {
             await ResetAndInitExpectations();
