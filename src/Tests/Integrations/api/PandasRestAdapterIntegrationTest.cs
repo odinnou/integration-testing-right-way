@@ -22,7 +22,7 @@ public class PandasRestAdapterIntegrationTest : BaseIntegrationTest
     [Fact]
     public async Task Add_should_returns_BadRequest_status_code_when_name_is_missing_and_coordinates_are_incorrect()
     {
-        // arrange
+        // arrange: force latitude, longitude and name to incorrect values
         InsertPandaDto dto = new() { Latitude = -91, Longitude = 181 };
 
         using (TestServer = HostConfiguration.Factory().Server)
@@ -34,7 +34,7 @@ public class PandasRestAdapterIntegrationTest : BaseIntegrationTest
             // act
             HttpResponseMessage httpResponse = await httpClient.PostAsync($"/api/pandas", new StringContent(JsonConvert.SerializeObject(dto, new Newtonsoft.Json.Converters.StringEnumConverter()), Encoding.UTF8, MediaTypeNames.Application.Json));
 
-            // assert
+            // assert: verify status code and check content as plain text
             httpResponse.StatusCode.Should().Be(HttpStatusCode.BadRequest);
             string result = await httpResponse.Content.ReadAsStringAsync();
             result.Should().ContainAll(nameof(InsertPandaDto.Name), nameof(InsertPandaDto.Latitude), nameof(InsertPandaDto.Longitude));
@@ -120,7 +120,7 @@ public class PandasRestAdapterIntegrationTest : BaseIntegrationTest
     [Fact]
     public async Task Get_should_returns_NotFound_status_code_when_unknow_id()
     {
-        // arrange
+        // arrange: use a random uuid (not existing in the database)
         Guid pandaId = Guid.NewGuid();
         using (TestServer = HostConfiguration.Factory().Server)
         {
@@ -132,7 +132,7 @@ public class PandasRestAdapterIntegrationTest : BaseIntegrationTest
             // act
             HttpResponseMessage httpResponse = await httpClient.GetAsync($"/api/pandas/{pandaId}");
 
-            // assert
+            // assert: verify status code and check content as plain text
             httpResponse.StatusCode.Should().Be(HttpStatusCode.NotFound);
             string result = await httpResponse.Content.ReadAsStringAsync();
             result.Should().Contain($"no panda found for id: {pandaId}");
