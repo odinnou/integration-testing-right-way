@@ -2,6 +2,7 @@ using AutoFixture;
 using AutoFixture.Xunit2;
 using FluentAssertions;
 using Microsoft.AspNetCore.TestHost;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Service.DrivenAdapters.DatabaseAdapters;
@@ -52,16 +53,22 @@ public class PandasRestAdapterIntegrationTest : BaseIntegrationTest
         {
             await ResetAndInitDatabase(Dataset.Empty);
 
+            using IServiceScope scopeBefore = TestServer.Services.CreateScope();
+            using PandaContext dbContextAfterBefore = scopeBefore.ServiceProvider.GetRequiredService<PandaContext>();
+
+            int count = await dbContextAfterBefore.Pandas.CountAsync();
+
             using HttpClient httpClient = TestServer.CreateClient();
 
             // act: make an http call to the POST /api/pandas endpoint, with DTO as JSON
             HttpResponseMessage httpResponse = await httpClient.PostAsync($"/api/pandas", new StringContent(JsonConvert.SerializeObject(dto, new Newtonsoft.Json.Converters.StringEnumConverter()), Encoding.UTF8, MediaTypeNames.Application.Json));
 
             // assert: with a DbContext, we could query the database to get the count or fetch the single panda
-            using IServiceScope scope = TestServer.Services.CreateScope();
-            using PandaContext dbContext = scope.ServiceProvider.GetRequiredService<PandaContext>();
+            using IServiceScope scopeAfter = TestServer.Services.CreateScope();
+            using PandaContext dbContextAfter = scopeAfter.ServiceProvider.GetRequiredService<PandaContext>();
             httpResponse.StatusCode.Should().Be(HttpStatusCode.OK);
-            PandaEntity pandaEntity = dbContext.Pandas.Single();
+            (await dbContextAfter.Pandas.CountAsync()).Should().Be(count + 1);
+            PandaEntity pandaEntity = dbContextAfter.Pandas.Single();
             PandaDto result = JsonConvert.DeserializeObject<PandaDto>(await httpResponse.Content.ReadAsStringAsync())!;
             result.Id.Should().NotBeEmpty();
             result.Id.Should().Be(pandaEntity.Id);
