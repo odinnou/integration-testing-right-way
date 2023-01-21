@@ -16,7 +16,7 @@
 
     <ItemGroup>
         <!--Allow to setup an ASP.NET TestServer-->
-        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="7.0.1" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="7.0.2" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.1" />
         <!--Speed up integration of MockServer-->
         <PackageReference Include="MockServerClientNet" Version="1.2.0" />
@@ -28,7 +28,7 @@
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
         <PackageReference Include="AutoFixture.Xunit2" Version="4.17.0" />
-        <PackageReference Include="FluentAssertions" Version="6.8.0" />
+        <PackageReference Include="FluentAssertions" Version="6.9.0" />
     </ItemGroup>
 
     <ItemGroup>

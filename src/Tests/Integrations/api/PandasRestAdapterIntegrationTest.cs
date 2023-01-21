@@ -92,10 +92,10 @@ public class PandasRestAdapterIntegrationTest : BaseIntegrationTest
 
             using HttpClient httpClient = TestServer.CreateClient();
 
-            // act
+            // act: PandaId GPS coordinates match with an address on the MockServer
             HttpResponseMessage httpResponse = await httpClient.GetAsync($"/api/pandas/{PandaData.Constants.PandaId}");
 
-            // assert
+            // assert: address should be not null
             httpResponse.StatusCode.Should().Be(HttpStatusCode.OK);
             PandaDto result = JsonConvert.DeserializeObject<PandaDto>(await httpResponse.Content.ReadAsStringAsync())!;
             result.Id.Should().Be(PandaData.Constants.PandaId);
@@ -114,10 +114,10 @@ public class PandasRestAdapterIntegrationTest : BaseIntegrationTest
 
             using HttpClient httpClient = TestServer.CreateClient();
 
-            // act
+            // act: PandaId2 GPS coordinates do not match with an address on the MockServer
             HttpResponseMessage httpResponse = await httpClient.GetAsync($"/api/pandas/{PandaData.Constants.PandaId2}");
 
-            // assert
+            // assert: address should be null
             httpResponse.StatusCode.Should().Be(HttpStatusCode.OK);
             PandaDto result = JsonConvert.DeserializeObject<PandaDto>(await httpResponse.Content.ReadAsStringAsync())!;
             result.Id.Should().Be(PandaData.Constants.PandaId2);

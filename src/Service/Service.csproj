@@ -17,9 +17,9 @@
       <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
       <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.1" />
-        <PackageReference Include="EFCore.NamingConventions" Version="7.0.0" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="7.0.1" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.1">
+        <PackageReference Include="EFCore.NamingConventions" Version="7.0.2" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="7.0.2" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.2">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
