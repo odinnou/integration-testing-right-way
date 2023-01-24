@@ -7,3 +7,4 @@ Integration Testing in .NET: the right way
 
 Allow me to aid you in boosting your code coverage as close to 100% as possible by reducing mock library usage and implementing a more realistic testing environment.
 
+My Medium.io story here: https://medium.com/@odinnou/integration-testing-in-net-the-right-way-3a2e73d6cefb?sk=85614bafe5e392e4779efedc6e4c7ba9
